@@ -2,9 +2,10 @@
 
 ### 注意
 
-チュートリアルはコピペだけして、内容は詳しく見ていません。 詳しく学びたい場合はチュートリアルの記事を読んでください。
+チュートリアルはコピペだけして、内容は詳しく見ていません。 詳しく学びたい場合はチュートリアルの記事を読んでください。  
+純粋にチュートリアルを PostgreSQL に接続できるようにしたものです。検索機能やスタイルの変更等の機能追加は行っていません。
 
-### 前提
+### 参考資料
 
 - チュートリアルは以下サイトの Thymeleaf 編（MyBatis3 用）を使用  
   https://terasolunaorg.github.io/guideline/current/ja/Tutorial/TutorialTodoThymeleaf.html
@@ -56,16 +57,10 @@ database.driverClassName=org.postgresql.Driver
 
 ### 4. アプリの起動
 
-1. **フロントエンドの起動**
-   frontend フォルダに移動して以下を実行
+クローンしたプロジェクトに対して、プロジェクトを右クリックして出てくる「Maven ＞プロジェクトの更新」と Maven ビルドを行う。  
+アプリの起動については、チュートリアルのサイトに記載されている方法と同じため割愛。  
+\*PostgreSQL の DB を立ち上げた状態で行ってください。
 
-   ```bash
-   npm run dev
-   ```
+### 5. 画面で確認
 
-2. **バックエンドの起動**  
-   backend フォルダに移動して以下を実行
-   ```bash
-   npx tsc
-   node dist/app.js
-   ```
+http://localhost:8080/todo/todo/list
