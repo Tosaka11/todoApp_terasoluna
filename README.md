@@ -63,4 +63,18 @@ database.driverClassName=org.postgresql.Driver
 
 ### 5. 画面で確認
 
-http://localhost:8080/todo/todo/list
+http://localhost:8080/todo/todo/list  
+
+---
+### Ex1. （追記）フロントエンドを修正  
+チュートリアルからフロント周りを変更した資材をBranch「working」へコミットしました  
+クローン後にブランチを上記に変えて参考にしてください
+---
+### Ex2. （追記）アプリが起動しないときの参考  
+①SQLの設定を見直す（\src\main\resources\META-INF\spring\todo-infra.properties ）  
+②プロジェクトのクリーンを実施する  
+③Maven Installを実施する  
+④プロジェクトを起動する  
+  
+※「Maven ＞プロジェクトの更新」をすると資材が変に更新されてアノテーションが正常に読み取れないことがある
+
