@@ -7,53 +7,52 @@
     href="../../../resources/app/css/styles.css" th:href="@{/resources/app/css/styles.css}">
 </head>
 <body>
+  <div class="container">
     <h1>Todo List</h1>
-    <div id="todoForm">
-        <div th:if="${resultMessages} != null" class="alert alert-success" th:class="|alert alert-${resultMessages.type}|">
-            <ul>
-                <li th:each="message : ${resultMessages}" th:text="${message.text}">Created successfully!</li>
-            </ul>
+    
+    <div th:if="${resultMessages}" th:class="|alert alert-${resultMessages.type}|">
+      <ul>
+        <li th:each="message : ${resultMessages}" th:text="${message.text}">メッセージ</li>
+      </ul>
+    </div>
+
+    <form action="/todo/create" th:action="@{/todo/create}" method="post">
+      <input type="text" placeholder="新しいタスクを入力..." th:field="${todoForm.todoTitle}" />
+      <button type="submit">追加</button>
+    </form>
+    <span class="text-error" id="todoTitle.errors" th:errors="${todoForm.todoTitle}"></span>
+
+    <div class="search-container">
+      <input type="text" id="menuSearch" placeholder="検索したいタスクを入力..." />
+    </div>
+
+    <ul class="todo-list">
+      <li class="todo" th:each="todo : ${todos}">
+        <span th:class="${todo.finished} ? 'strike'" th:text="${todo.todoTitle}">タスク内容</span>
+        <div class="actions">
+          <form th:if="${!todo.finished}" th:action="@{/todo/finish}" method="post">
+            <input type="hidden" name="todoId" th:value="${todo.todoId}" />
+            <button type="submit">完了</button>
+          </form>
+          <form th:action="@{/todo/delete}" method="post">
+            <input type="hidden" name="todoId" th:value="${todo.todoId}" />
+            <button type="submit">削除</button>
+          </form>
         </div>
-        <form action="/todo/create" th:action="@{/todo/create}" method="post">
-            <input type="text" th:field="${todoForm.todoTitle}" />
-            <span id="todoTitle.errors" th:errors="${todoForm.todoTitle}" class="text-error">size must be between 1 and 30</span>
-            <button>Create Todo</button>
-        </form>
-    </div>
-    <hr />
-    <div id="todoList">
-        <ul th:remove="all-but-first">
-            <li th:each="todo : ${todos}">
-                <span th:class="${todo.finished} ? 'strike'" th:text="${todo.todoTitle}">Send a e-mail</span>
-                <form th:if="${!todo.finished}" action="/todo/finish" th:action="@{/todo/finish}"
-                    method="post" class="inline">
-                    <input type="hidden" name="todoId" th:value="${todo.todoId}" />
-                    <button>Finish</button>
-                </form>
-                <!-- (1) -->
-                <form action="/todo/delete" th:action="@{/todo/delete}"
-                    method="post" class="inline">
-                    <!-- (2) -->
-                    <input type="hidden" name="todoId" th:value="${todo.todoId}" />
-                    <button>Delete</button>
-                </form>
-            </li>
-            <li>
-                <span>Have a lunch</span>
-                <form action="/todo/finish" method="post" class="inline">
-                    <button>Finish</button>
-                </form>
-                <form action="/todo/delete" method="post" class="inline">
-                    <button>Delete</button>
-                </form>
-            </li>
-            <li>
-                <span class="strike">Read a book</span>
-                <form action="/todo/delete" method="post" class="inline">
-                    <button>Delete</button>
-                </form>
-            </li>
-        </ul>
-    </div>
+      </li>
+    </ul>
+  </div>
+  
+  <script>
+    document.getElementById('menuSearch').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      const items = document.querySelectorAll('.todo-list .todo');
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? 'flex' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>
