@@ -68,7 +68,8 @@ http://localhost:8080/todo/todo/list
 ---
 ### Ex1. （追記）フロントエンドを修正  
 チュートリアルからフロント周りを変更した資材をBranch「working」へコミットしました  
-クローン後にブランチを上記に変えて参考にしてください
+クローン後にブランチを上記に変えて参考にしてください  
+
 ---
 ### Ex2. （追記）アプリが起動しないときの参考  
 ①SQLの設定を見直す（\src\main\resources\META-INF\spring\todo-infra.properties ）  
